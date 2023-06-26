@@ -1,10 +1,15 @@
+import Heading from "./components/Heading";
+import Search from "./components/Search";
+import Products from "./components/Products";
 
-function App() {
+const App = () => {
   return (
-    <>
-      <h1>Let's Begin</h1>
-    </>
-  )
-}
+    <div className='container'>
+      <Heading title="🔍Search Bar🔎" />
+      <Search />
+      <Products />
+    </div>
+  );
+};
 
-export default App
+export default App;
