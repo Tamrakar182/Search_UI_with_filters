@@ -47,6 +47,7 @@ const Filter = ({handleShowFilter}) => {
         // Enter key
         if (highlightedIndex !== -1) {
           const highlightedProductId = selectedProducts[highlightedIndex].id;
+          //TODO: handle enter press
           console.log("Product highlighted:", selectedProducts[highlightedIndex]);
         }
       }
@@ -124,7 +125,6 @@ const Filter = ({handleShowFilter}) => {
           />
           <Price price={selectedPrice} handlePrice={handlePrice} />
         </div>
-        {/* </div> */}
         <div className="content">
         <KeyBindingHints />
         {products.length === 0 ? (
@@ -134,6 +134,7 @@ const Filter = ({handleShowFilter}) => {
             products={filteredProducts}
             highlightedIndex={highlightedIndex}
             handleEnterKeyPress={(productId) => {
+              //TODO: Handle enter key press
               console.log("Product highlighted:", productId);
             }}
           />
