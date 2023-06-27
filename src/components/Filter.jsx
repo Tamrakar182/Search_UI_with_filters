@@ -6,7 +6,7 @@ import { getProducts } from "../services/Products";
 import Price from "./Price";
 import Category from "./Category";
 
-const Filter = ({handleShowFilter}) => {
+const Filter = ({ handleShowFilter }) => {
   const [searchText, setSearchText] = useState("");
   const [products, setProducts] = useState([]);
   const [selectedProducts, setSelectedProducts] = useState([]);
@@ -21,44 +21,61 @@ const Filter = ({handleShowFilter}) => {
     });
   }, []);
 
+  const scrollHighlightedItemIntoView = () => {
+    const container = document.querySelector(".content");
+    const highlightedItem = container.querySelector(".highlighted");
+
+    if (highlightedItem) {
+      highlightedItem.scrollIntoView({
+        block: "center",
+        behavior: "smooth",
+      });
+    }
+  };
+
   useEffect(() => {
     const handleEscKeyPress = (event) => {
-      if (event.keyCode === 27) {
+      if (event.key === "Escape") {
         handleShowFilter();
       }
     };
 
     const handleArrowKeyPress = (event) => {
-      if (event.keyCode === 38) {
+      if (event.key === "ArrowUp") {
         // Up arrow key
+        event.preventDefault();
         setHighlightedIndex((prevIndex) =>
           prevIndex > 0 ? prevIndex - 1 : prevIndex
         );
-      } else if (event.keyCode === 40) {
+        scrollHighlightedItemIntoView();
+      } else if (event.key === "ArrowDown") {
         // Down arrow key
+        event.preventDefault();
         setHighlightedIndex((prevIndex) =>
           prevIndex < selectedProducts.length - 1 ? prevIndex + 1 : prevIndex
         );
+        scrollHighlightedItemIntoView();
       }
     };
 
     const handleEnterKeyPress = (event) => {
-      if (event.keyCode === 13) {
+      if (event.key === "Enter") {
+        event.preventDefault();
         // Enter key
         if (highlightedIndex !== -1) {
-          const highlightedProductName = selectedProducts[highlightedIndex].title;
+          const highlightedProductName =
+            selectedProducts[highlightedIndex].title;
           setSearchText(highlightedProductName);
         }
       }
     };
-    
 
     const handleClickOutside = (event) => {
-        const searchPopUp = document.querySelector(".searchPopUp");
-        if (!searchPopUp.contains(event.target)) {
-          handleShowFilter();
-        }
-      };
+      const searchPopUp = document.querySelector(".searchPopUp");
+      if (!searchPopUp.contains(event.target)) {
+        handleShowFilter();
+      }
+    };
 
     document.addEventListener("keydown", handleEscKeyPress);
     document.addEventListener("keydown", handleEnterKeyPress);
@@ -104,12 +121,15 @@ const Filter = ({handleShowFilter}) => {
   };
   const filteredProducts = selectedProducts.filter((product) => {
     const productTitle = product.title.toLowerCase();
-    const lowercaseSearchText = typeof searchText === 'string' ? searchText.toLowerCase() : '';
+    const lowercaseSearchText =
+      typeof searchText === "string" ? searchText.toLowerCase() : "";
     return productTitle.includes(lowercaseSearchText);
   });
 
   const handleEnterKeyPress = (productId) => {
-    const selectedProduct = products.find((product) => product.id === productId);
+    const selectedProduct = products.find(
+      (product) => product.id === productId
+    );
     if (selectedProduct) {
       setSearchText(selectedProduct.title);
       console.log("Product selected:", selectedProduct.title);
@@ -135,20 +155,20 @@ const Filter = ({handleShowFilter}) => {
           <Price price={selectedPrice} handlePrice={handlePrice} />
         </div>
         <div className="content">
-        <KeyBindingHints />
-        {products.length === 0 ? (
-          <p>Loading...</p> 
-        ) : (
-          <Products
-            products={filteredProducts}
-            highlightedIndex={highlightedIndex}
-            handleEnterKeyPress={handleEnterKeyPress}
-          />
-        )}
-        
+          <KeyBindingHints />
+          {products.length === 0 ? (
+            <p>Loading...</p>
+          ) : (
+            <Products
+              products={filteredProducts}
+              highlightedIndex={highlightedIndex}
+              handleEnterKeyPress={handleEnterKeyPress}
+            />
+          )}
+        </div>
       </div>
     </div>
-    </div> )
+  );
 };
 
 export default Filter;

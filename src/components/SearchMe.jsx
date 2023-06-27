@@ -11,7 +11,7 @@ const SearchMe = () => {
 
     useEffect(() => {
         const handleCtrlKeyPress = (event) => {
-          if (event.keyCode === 17) {
+          if (event.ctrlKey && event.key === 'm') {
             handleShowFilter();
           }
         }
@@ -28,7 +28,7 @@ const SearchMe = () => {
     return (
         <div className="input-container">
         <input onClick={handleShowFilter} className="input-field"/>
-        <img src="/assets/ctrl.svg" className="shortcut-button"/>
+        <p className="shortcut-button"><div class="shortcut-text">Ctrl+M</div></p>
         {showFilter ? <Filter handleShowFilter={handleShowFilter}/> : null}
         </div>
         
