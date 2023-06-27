@@ -88,7 +88,7 @@ body {
 
 
  .selectedDropDown {
-    width: 100%;
+    width: 85%;
     max-width: 500px;
     height: 50px;
     border-radius: 5px;
@@ -100,11 +100,37 @@ body {
     margin-bottom: 0.5rem;
     cursor: pointer;
     display: flex;
+    overflow: hidden;
     justify-content: space-between;
     align-items: center;
     position: relative;
  }
 
+ @media screen and (max-width: 642px) {
+    .selectedDropDown {
+        padding:1vh;
+        width: 100%;
+        flex-direction: column;
+        height: 20vh;
+        justify-content: space-around;
+    }
+    .card{
+        flex-direction: column;
+        height: 40vh;
+        justify-content: space-around;
+        overflow: scroll;
+    }
+    .card img {
+        width: 100%;
+        max-width: 200px;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 5px;
+        margin-bottom: 1rem;
+        justify-content: center;
+    }
+ }
+    
  .keybinding-hints{
     width: 100%;
     max-width: 500px;
@@ -222,10 +248,66 @@ body {
 
 
 .highlighted {
-    background-color: aqua;
+    background-color: #B1A2FD;
  }
 
 .selectedRed {
     background-color: #ff0000;
  }
 
+ .input-container {
+    position: relative;
+    margin-bottom: 1rem;
+  }
+
+  .input-field {
+    width: 100%;
+    max-width: 500px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 0 1rem;
+    font-size: 1rem;
+    font-weight: 400;
+    outline: none;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+ }
+
+ .input-field input[type="text"] {
+    width: 250px;
+    height: 40px;
+    padding: 8px;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    font-family: Arial, sans-serif;
+  }
+
+  .shortcut-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .shortcut-button:hover {
+    background-color: #785FD7;
+  }
+
+    .shortcut-button svg {
+        width: 20px;
+        height: 20px;
+        margin: 10px;
+    }

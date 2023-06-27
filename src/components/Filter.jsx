@@ -17,6 +17,7 @@ const Filter = ({handleShowFilter}) => {
   useEffect(() => {
     getProducts().then((data) => {
       setProducts(data);
+      setSelectedProducts(data);
     });
   }, []);
 
@@ -77,7 +78,7 @@ const Filter = ({handleShowFilter}) => {
 
   const handleCategory = (event) => {
     const selectedCategory = event.target.value;
-    setSelectedCategory(event.target.value);
+    setSelectedCategory(selectedCategory);
 
     if (selectedCategory === "All") {
       setSelectedProducts(products);
@@ -90,7 +91,7 @@ const Filter = ({handleShowFilter}) => {
 
   const handlePrice = (event) => {
     const selectedPrice = event.target.value;
-    setSelectedPrice(event.target.value);
+    setSelectedPrice(selectedPrice);
 
     if (selectedPrice === "All") {
       setSelectedProducts(products);
@@ -108,6 +109,7 @@ const Filter = ({handleShowFilter}) => {
   return (
     <div className="popup-overlay">
       <div className="searchPopUp">
+        {/* <div className="top"> */}
         <div className="header">
           <SearchBox
             searchText={searchText}
@@ -122,16 +124,24 @@ const Filter = ({handleShowFilter}) => {
           />
           <Price price={selectedPrice} handlePrice={handlePrice} />
         </div>
+        {/* </div> */}
         <div className="content">
         <KeyBindingHints />
-        <Products products={filteredProducts} highlightedIndex={highlightedIndex} handleEnterKeyPress={(productId) => {
+        {products.length === 0 ? (
+          <p>Loading...</p> 
+        ) : (
+          <Products
+            products={filteredProducts}
+            highlightedIndex={highlightedIndex}
+            handleEnterKeyPress={(productId) => {
               console.log("Product highlighted:", productId);
-            }}/>
-        </div>
+            }}
+          />
+        )}
         
       </div>
     </div>
-  );
+    </div> )
 };
 
 export default Filter;
