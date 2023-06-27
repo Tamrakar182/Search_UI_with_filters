@@ -28,7 +28,7 @@ const SearchMe = () => {
     return (
         <div className="input-container">
         <input onClick={handleShowFilter} className="input-field"/>
-        <img src="./src/assets/ctrl.svg" className="shortcut-button"/>
+        <img src="/assets/ctrl.svg" className="shortcut-button"/>
         {showFilter ? <Filter handleShowFilter={handleShowFilter}/> : null}
         </div>
         
