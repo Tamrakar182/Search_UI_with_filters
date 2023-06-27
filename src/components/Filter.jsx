@@ -46,12 +46,12 @@ const Filter = ({handleShowFilter}) => {
       if (event.keyCode === 13) {
         // Enter key
         if (highlightedIndex !== -1) {
-          const highlightedProductId = selectedProducts[highlightedIndex].id;
-          //TODO: handle enter press
-          console.log("Product highlighted:", selectedProducts[highlightedIndex]);
+          const highlightedProductName = selectedProducts[highlightedIndex].title;
+          setSearchText(highlightedProductName);
         }
       }
     };
+    
 
     const handleClickOutside = (event) => {
         const searchPopUp = document.querySelector(".searchPopUp");
@@ -102,19 +102,28 @@ const Filter = ({handleShowFilter}) => {
       );
     }
   };
-
   const filteredProducts = selectedProducts.filter((product) => {
-    return product.title.toLowerCase().includes(searchText.toLowerCase());
+    const productTitle = product.title.toLowerCase();
+    const lowercaseSearchText = typeof searchText === 'string' ? searchText.toLowerCase() : '';
+    return productTitle.includes(lowercaseSearchText);
   });
+
+  const handleEnterKeyPress = (productId) => {
+    const selectedProduct = products.find((product) => product.id === productId);
+    if (selectedProduct) {
+      setSearchText(selectedProduct.title);
+      console.log("Product selected:", selectedProduct.title);
+    }
+  };
 
   return (
     <div className="popup-overlay">
       <div className="searchPopUp">
-        {/* <div className="top"> */}
         <div className="header">
           <SearchBox
             searchText={searchText}
             handleSearchText={handleSearchText}
+            setSearchText={setSearchText}
           />
         </div>
 
@@ -133,10 +142,7 @@ const Filter = ({handleShowFilter}) => {
           <Products
             products={filteredProducts}
             highlightedIndex={highlightedIndex}
-            handleEnterKeyPress={(productId) => {
-              //TODO: Handle enter key press
-              console.log("Product highlighted:", productId);
-            }}
+            handleEnterKeyPress={handleEnterKeyPress}
           />
         )}
         

@@ -37,8 +37,25 @@ body {
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
     display: flex;
+    border: 1px solid #ccc;
+    border-radius: 5px;
     justify-content: center;
     align-items: center;
+}
+
+.searchContainer img {
+    width: 20px;
+    height: 20px;
+    margin-right: 0.5rem;
+    fill: #000;
+}
+
+.searchContainer p {
+    font-size: 0.9rem;
+    font-weight: 400;
+    margin-left: 0.5rem;
+    color: #000;
+    cursor: pointer;
 }
 
 .popup-overlay {
@@ -173,7 +190,7 @@ body {
     max-width: 500px;
     height: 50px;
     border-radius: 5px;
-    border: 1px solid #ccc;
+    border: 0 solid #ccc;
     padding: 0 1rem;
     font-size: 1rem;
     font-weight: 400;
