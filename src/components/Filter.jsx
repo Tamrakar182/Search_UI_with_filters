@@ -12,12 +12,64 @@ const Filter = ({handleShowFilter}) => {
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedPrice, setSelectedPrice] = useState("All");
+  const [highlightedIndex, setHighlightedIndex] = useState(-1);
 
   useEffect(() => {
     getProducts().then((data) => {
       setProducts(data);
     });
   }, []);
+
+  useEffect(() => {
+    const handleEscKeyPress = (event) => {
+      if (event.keyCode === 27) {
+        handleShowFilter();
+      }
+    };
+
+    const handleArrowKeyPress = (event) => {
+      if (event.keyCode === 38) {
+        // Up arrow key
+        setHighlightedIndex((prevIndex) =>
+          prevIndex > 0 ? prevIndex - 1 : prevIndex
+        );
+      } else if (event.keyCode === 40) {
+        // Down arrow key
+        setHighlightedIndex((prevIndex) =>
+          prevIndex < selectedProducts.length - 1 ? prevIndex + 1 : prevIndex
+        );
+      }
+    };
+
+    const handleEnterKeyPress = (event) => {
+      if (event.keyCode === 13) {
+        // Enter key
+        if (highlightedIndex !== -1) {
+          const highlightedProductId = selectedProducts[highlightedIndex].id;
+          console.log("Product highlighted:", selectedProducts[highlightedIndex]);
+        }
+      }
+    };
+
+    const handleClickOutside = (event) => {
+        const searchPopUp = document.querySelector(".searchPopUp");
+        if (!searchPopUp.contains(event.target)) {
+          handleShowFilter();
+        }
+      };
+
+    document.addEventListener("keydown", handleEscKeyPress);
+    document.addEventListener("keydown", handleEnterKeyPress);
+    document.addEventListener("keydown", handleArrowKeyPress);
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("keydown", handleEscKeyPress);
+      document.removeEventListener("keydown", handleEnterKeyPress);
+      document.removeEventListener("keydown", handleArrowKeyPress);
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [handleShowFilter, selectedProducts.length, highlightedIndex]);
 
   const handleSearchText = (event) => {
     setSearchText(event.target.value);
@@ -54,7 +106,7 @@ const Filter = ({handleShowFilter}) => {
   });
 
   return (
-    <div className="popup-overlay" onClick={handleShowFilter}>
+    <div className="popup-overlay">
       <div className="searchPopUp">
         <div className="header">
           <SearchBox
@@ -72,7 +124,9 @@ const Filter = ({handleShowFilter}) => {
         </div>
         <div className="content">
         <KeyBindingHints />
-        <Products products={filteredProducts} />
+        <Products products={filteredProducts} highlightedIndex={highlightedIndex} handleEnterKeyPress={(productId) => {
+              console.log("Product highlighted:", productId);
+            }}/>
         </div>
         
       </div>

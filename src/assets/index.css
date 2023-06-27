@@ -86,6 +86,7 @@ body {
     
  }
 
+
  .selectedDropDown {
     width: 100%;
     max-width: 500px;
@@ -219,4 +220,12 @@ body {
     margin-bottom: 0.5rem;
 }
 
+
+.highlighted {
+    background-color: aqua;
+ }
+
+.selectedRed {
+    background-color: #ff0000;
+ }
 
