@@ -6,7 +6,7 @@ import { getProducts } from "../services/Products";
 import Price from "./Price";
 import Category from "./Category";
 
-const Filter = () => {
+const Filter = ({handleShowFilter}) => {
   const [searchText, setSearchText] = useState("");
   const [products, setProducts] = useState([]);
   const [selectedProducts, setSelectedProducts] = useState([]);
@@ -43,7 +43,9 @@ const Filter = () => {
     if (selectedPrice === "All") {
       setSelectedProducts(products);
     } else {
-      setSelectedProducts(products.filter((product) => product.price < selectedPrice));
+      setSelectedProducts(
+        products.filter((product) => product.price < selectedPrice)
+      );
     }
   };
 
@@ -52,15 +54,28 @@ const Filter = () => {
   });
 
   return (
-    <div className="searchPopUp">
-      <SearchBox searchText={searchText} handleSearchText={handleSearchText} />
+    <div className="popup-overlay" onClick={handleShowFilter}>
+      <div className="searchPopUp">
+        <div className="header">
+          <SearchBox
+            searchText={searchText}
+            handleSearchText={handleSearchText}
+          />
+        </div>
 
-      <div className="selectedDropDown">
-      <Category category={selectedCategory} handleCategory={handleCategory} />
-      <Price price={selectedPrice} handlePrice={handlePrice} />
+        <div className="selectedDropDown">
+          <Category
+            category={selectedCategory}
+            handleCategory={handleCategory}
+          />
+          <Price price={selectedPrice} handlePrice={handlePrice} />
+        </div>
+        <div className="content">
+        <KeyBindingHints />
+        <Products products={filteredProducts} />
+        </div>
+        
       </div>
-      <KeyBindingHints />
-      <Products products={filteredProducts} />
     </div>
   );
 };
