@@ -12,14 +12,4 @@ export const getProductsByCategory = async (category) => {
     return data;
 }
 
-export const getProductsBySearch = async (search) => {
-    const { data } = await axios.get(`${API_URL}/search?q=${search}`);
-    return data;
-}
-
-export const getProductsByCategoryAndSearch = async (category, search) => {
-    const { data } = await axios.get(`${API_URL}/category/${category}?q=${search}`);
-    return data;
-}
-
 

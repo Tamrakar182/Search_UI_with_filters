@@ -1,11 +1,11 @@
 import Heading from "./components/Heading";
-import Search from "./components/Search";
+import Filter from "./components/Filter";
 
 const App = () => {
   return (
     <div className='container'>
       <Heading title="🔍Search Bar🔎" />
-      <Search />
+      <Filter />
     </div>
   );
 };
