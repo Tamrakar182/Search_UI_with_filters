@@ -33,11 +33,82 @@ body {
 .searchContainer {
     width: 100%;
     max-width: 600px;
-    margin-bottom: 2rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
+.searchPopUp {
+    width: 100%;
+    max-width: 600px;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    list-style-type: none;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+ }
+
+ .selectedDropDown {
+    width: 100%;
+    max-width: 500px;
+    height: 50px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 0 1rem;
+    font-size: 1rem;
+    font-weight: 400;
+    outline: none;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+ }
+
+ .keybinding-hints{
+    width: 100%;
+    max-width: 500px;
+    height: 50px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    font-weight: 400;
+    outline: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    position: relative;
+ }
+
+ .keybinding-hints ul {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    padding:1rem;
+ }
+
+ .icon{
+    width: 20px;
+    height: 20px;
+    margin-right: 0.5rem;
+    fill: #000;
+    cursor: pointer;
+ }
+ .keybinding-hints li {
+    list-style-type: none;
+    display: inline-block;
+    align-items: center;
+ }
 
 .searchField{
     width: 100%;

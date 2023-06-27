@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import Products from "./Products";
 import SearchBox from "./SearchBox";
+import KeyBindingHints from "./KeyBindingHints";
 import { getProducts } from "../services/Products";
-import { getAllCategories } from "../services/Categories";
 import Price from "./Price";
 import Category from "./Category";
 
@@ -52,12 +52,16 @@ const Filter = () => {
   });
 
   return (
-    <>
+    <div className="searchPopUp">
       <SearchBox searchText={searchText} handleSearchText={handleSearchText} />
+
+      <div className="selectedDropDown">
       <Category category={selectedCategory} handleCategory={handleCategory} />
       <Price price={selectedPrice} handlePrice={handlePrice} />
+      </div>
+      <KeyBindingHints />
       <Products products={filteredProducts} />
-    </>
+    </div>
   );
 };
 
