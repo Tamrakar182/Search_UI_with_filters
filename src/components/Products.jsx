@@ -1,15 +1,4 @@
-import { useState, useEffect } from "react";
-import { getProducts } from "../services/Products";
-
-const Products = () => {
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    getProducts().then((data) => {
-      setProducts(data);
-    });
-  }, []);
-
+const Products = ({products}) => {
   return (
     <>
       <ul>
