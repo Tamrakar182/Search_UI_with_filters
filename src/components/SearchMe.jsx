@@ -2,9 +2,7 @@ import Filter from "./Filter";
 import { useState, useEffect } from "react";
 
 const SearchMe = () => {
-    const [showFilter, setShowFilter] = useState(false);
-    
-    
+    const [showFilter, setShowFilter] = useState(false);    
         const handleShowFilter = () => {
             setShowFilter(!showFilter);
         };
